@@ -1,0 +1,5 @@
+﻿  链队列.cpp
+d:\study\study2\数据结构学习笔记\datastructure\线性表\链队列\链队列\链队列.cpp(154): warning C4477: “printf”: 格式字符串“%u”需要类型“unsigned int”的参数，但可变参数 1 拥有了类型“QueuePtr”
+d:\study\study2\数据结构学习笔记\datastructure\线性表\链队列\链队列\链队列.cpp(154): warning C4477: “printf”: 格式字符串“%u”需要类型“unsigned int”的参数，但可变参数 2 拥有了类型“QueuePtr”
+  链队列.vcxproj -> D:\Study\Study2\数据结构学习笔记\DataStructure\线性表\链队列\Debug\链队列.exe
+  链队列.vcxproj -> D:\Study\Study2\数据结构学习笔记\DataStructure\线性表\链队列\Debug\链队列.pdb (Full PDB)

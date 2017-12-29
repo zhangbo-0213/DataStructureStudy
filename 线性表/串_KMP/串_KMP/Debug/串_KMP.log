@@ -1,0 +1,4 @@
+﻿  串_KMP.cpp
+d:\study\study2\数据结构学习笔记\datastructure\线性表\串_kmp\串_kmp\串_kmp.cpp(28): warning C4267: “=”: 从“size_t”转换到“char”，可能丢失数据
+  串_KMP.vcxproj -> D:\Study\Study2\数据结构学习笔记\DataStructure\线性表\串_KMP\Debug\串_KMP.exe
+  串_KMP.vcxproj -> D:\Study\Study2\数据结构学习笔记\DataStructure\线性表\串_KMP\Debug\串_KMP.pdb (Full PDB)

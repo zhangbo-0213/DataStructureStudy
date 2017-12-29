@@ -1,0 +1,5 @@
+﻿  二叉树链表实现2.cpp
+d:\study\study2\数据结构学习笔记\datastructure\二叉树\二叉树\二叉树链表实现2\二叉树链表实现2.cpp(31): warning C4267: “=”: 从“size_t”转换到“char”，可能丢失数据
+d:\study\study2\数据结构学习笔记\datastructure\二叉树\二叉树\二叉树链表实现2\二叉树链表实现2.cpp(152): warning C4101: “i”: 未引用的局部变量
+  二叉树链表实现2.vcxproj -> D:\Study\Study2\数据结构学习笔记\DataStructure\二叉树\二叉树\Debug\二叉树链表实现2.exe
+  二叉树链表实现2.vcxproj -> D:\Study\Study2\数据结构学习笔记\DataStructure\二叉树\二叉树\Debug\二叉树链表实现2.pdb (Full PDB)
