@@ -1,5 +1,6 @@
 ﻿  邻接多重表.cpp
 e:\msysgit\datastructurestudy\图\邻接多重表\邻接多重表.cpp(49): warning C4101: “i”: 未引用的局部变量
 e:\msysgit\datastructurestudy\图\邻接多重表\邻接多重表.cpp(94): warning C4477: “scanf_s”: 格式字符串“%d”需要类型“int *”的参数，但可变参数 1 拥有了类型“float *”
+e:\msysgit\datastructurestudy\图\邻接多重表\邻接多重表.cpp(570): warning C4715: “BFSTraverse”: 不是所有的控件路径都返回值
   邻接多重表.vcxproj -> E:\msysgit\DataStructureStudy\图\Debug\邻接多重表.exe
   邻接多重表.vcxproj -> E:\msysgit\DataStructureStudy\图\Debug\邻接多重表.pdb (Full PDB)

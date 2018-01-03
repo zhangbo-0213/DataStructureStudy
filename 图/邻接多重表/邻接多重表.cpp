@@ -121,7 +121,7 @@ Status PutVex(MultiAdjGraph *G, VertexType v, VertexType value) {
 int FirstAdjVex(MultiAdjGraph G, VertexType v) {
 	int i;
 	i = LocateVex(G, v);
-	if (i) {
+	if (i>=0) {
 		if (G.adjlist[i].firstarc) {
 			if (G.adjlist[i].firstarc->ivex == i)
 				return G.adjlist[i].firstarc->jvex;
@@ -129,10 +129,10 @@ int FirstAdjVex(MultiAdjGraph G, VertexType v) {
 				return G.adjlist[i].firstarc->ivex;
 		}
 		else
-			return ERROR;
+			return -1;
 	}
 	else
-		return ERROR;
+		return -1;
 }
 
 //返回v的(相对于w的)下一个邻接定点的序号,若w是v的最后一个邻接点，则返回-1
@@ -142,7 +142,7 @@ int NextAdjVex(MultiAdjGraph G, VertexType v, VertexType w) {
 	i = LocateVex(G, v);
 	j = LocateVex(G,w);    
 	if (i < 0 || j < 0) {
-		return ERROR;
+		return -1;
 	}
 	e = G.adjlist[i].firstarc;
 	while (e) {
@@ -169,7 +169,7 @@ int NextAdjVex(MultiAdjGraph G, VertexType v, VertexType w) {
 				return e->ivex;
 		}
 
-		return ERROR;
+		return -1;
 } 
 
 //图中添加顶点，不添加与该顶点有关的边，交给InsertEdge函数处理
@@ -482,6 +482,92 @@ Status DFSTraverse(MultiAdjGraph *G) {
 			DFS(*G,i);
 	return OK;
 }
+
+//关于队列的操作
+Status InitQueue(LinkQueue *Q) {
+	Q->front = Q->rear=new QNode();
+	Q->front->next = NULL;                     //指定队列头结点
+	return OK;
+}
+
+bool QueueEmpty(LinkQueue Q) {
+	if (Q.front == Q.rear)
+		return true;
+	else
+		return false;
+}
+
+Status EnQueue(LinkQueue *Q, QElemType q) {
+	QueuePtr p = new QNode();    //new运算符返回的是地址
+	if (!p)
+		return ERROR;
+	p->data = q;
+	p->next = NULL;
+	Q->rear->next = p;
+	Q->rear = p;
+	return OK;
+}
+
+Status DeQueue(LinkQueue *Q, QElemType *q) {
+	QueuePtr p;
+	if (Q->front == Q->rear)
+		return ERROR;
+	p = Q->front->next;
+	*q = p->data;
+	Q->front->next = p->next;
+	if (p == Q->rear)
+		Q->front = Q->rear;
+	delete p;
+	return OK;
+}
+
+Status DestroyQueue(LinkQueue *Q) {
+	while (Q->front) {
+		Q->rear = Q->front->next;
+		free(Q->front);
+		Q->front = Q->rear;
+	}
+	return OK;
+}
+
+//广度优先搜索 BFS
+Status BFSTraverse(MultiAdjGraph *G) {
+	int i,w,u;
+	VertexType w1, u1;
+	for (i = 0; i < G->ivexNum; ++i)
+		G->adjlist[i].isVisited = false;
+	LinkQueue *q=new LinkQueue();      //结构体是值类型变量，声明的同时在栈空间开辟了内存；而指针变量不是值类型变量，声明时并未即时分配内存，因此需要进行初始化分配内存
+	InitQueue(q);
+	for (i = 0; i < G->ivexNum; ++i) {
+		if (!G->adjlist[i].isVisited) {
+			G->adjlist[i].isVisited = true;
+			printf("搜索的顶点的值是:%d\n", G->adjlist[i].data);
+			//printf("Queue.rear地址:%d\n", q.rear);
+			EnQueue(q, i);
+			//printf("Queue.rear地址:%d\n",q.rear);
+			//printf("Queue.front地址:%d\n", q.front);
+
+			while (!QueueEmpty(*q)) {
+				DeQueue(q, &u);
+				u1 = GetVexValue(*G, u);
+				//printf("出队时队首元素的值:%d\n", u1);
+				//printf("出队时队首元素的邻接点的下标:%d\n",FirstAdjVex(*G, u1));
+				for (w = FirstAdjVex(*G, u1); w >= 0; w = NextAdjVex(*G, u1, w1)) {
+					if (!G->adjlist[w].isVisited) {
+						printf("搜索的顶点的值是:%d\n", G->adjlist[w].data);
+						G->adjlist[w].isVisited = true;
+						EnQueue(q, w);
+					}
+					w1 = GetVexValue(*G,w);
+				}
+			}
+		}
+		return OK;
+	}
+	
+}
+
+
 int main()
 {
 	MultiAdjGraph *G=new MultiAdjGraph;
@@ -517,6 +603,9 @@ int main()
 
 	printf("\n按照深度搜索的遍历结果：\n");
 	DFSTraverse(G);
+
+	printf("\n按照广度搜索的遍历结果：\n");
+	BFSTraverse(G);
 
 	getchar();
 	getchar();
