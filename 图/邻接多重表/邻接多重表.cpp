@@ -403,7 +403,7 @@ int FindNextAdj(MultiAdjGraph G, VertexType v) {
 	return j;
 }    
 
-//设置顶点为未访问状态
+//设置边为未访问状态
 void MarkUnVisited(MultiAdjGraph *G) {
 	int i;
 	EdgeType *p=NULL;
@@ -453,6 +453,35 @@ Status ShowGraph(MultiAdjGraph G) {
 	}
 	return OK;
 }
+
+//深度优先搜索
+void DFS(MultiAdjGraph G, int i) {
+	EdgeType *e;
+	e= G.adjlist[i].firstarc;
+	printf("遍历的结点的值：%d\n",G.adjlist[i].data);
+	G.adjlist[i].isVisited = true;
+	while (e) {
+		if (e->ivex == i) {
+			if(!G.adjlist[e->jvex].isVisited)
+				DFS(G,e->jvex);
+			e = e->ilink;
+		}
+		else {
+			if (!G.adjlist[e->ivex].isVisited)
+				DFS(G,e->ivex);
+			e = e->jlink;
+		}
+	}	
+	}
+Status DFSTraverse(MultiAdjGraph *G) {
+	int i;
+	for (i = 0; i < G->ivexNum; ++i) 
+		G->adjlist[i].isVisited = false;
+	for (i = 0; i < G->ivexNum; ++i)
+		if(!G->adjlist[i].isVisited)
+			DFS(*G,i);
+	return OK;
+}
 int main()
 {
 	MultiAdjGraph *G=new MultiAdjGraph;
@@ -484,7 +513,10 @@ int main()
 		scanf_s("%d", &v2);
 		InsertEdge(G, v1, v2);
 	}
-	ShowGraph(*G);
+	ShowGraph(*G);    
+
+	printf("\n按照深度搜索的遍历结果：\n");
+	DFSTraverse(G);
 
 	getchar();
 	getchar();

@@ -1,5 +1,5 @@
 ﻿  邻接多重表.cpp
-d:\study\study2\数据结构学习笔记\datastructure\图\邻接多重表\邻接多重表.cpp(50): warning C4101: “i”: 未引用的局部变量
-d:\study\study2\数据结构学习笔记\datastructure\图\邻接多重表\邻接多重表.cpp(95): warning C4477: “scanf_s”: 格式字符串“%d”需要类型“int *”的参数，但可变参数 1 拥有了类型“float *”
-  邻接多重表.vcxproj -> D:\Study\Study2\数据结构学习笔记\DataStructure\图\Debug\邻接多重表.exe
-  邻接多重表.vcxproj -> D:\Study\Study2\数据结构学习笔记\DataStructure\图\Debug\邻接多重表.pdb (Full PDB)
+e:\msysgit\datastructurestudy\图\邻接多重表\邻接多重表.cpp(49): warning C4101: “i”: 未引用的局部变量
+e:\msysgit\datastructurestudy\图\邻接多重表\邻接多重表.cpp(94): warning C4477: “scanf_s”: 格式字符串“%d”需要类型“int *”的参数，但可变参数 1 拥有了类型“float *”
+  邻接多重表.vcxproj -> E:\msysgit\DataStructureStudy\图\Debug\邻接多重表.exe
+  邻接多重表.vcxproj -> E:\msysgit\DataStructureStudy\图\Debug\邻接多重表.pdb (Full PDB)
