@@ -1,0 +1,5 @@
+﻿  最小生成树_Prim.cpp
+e:\msysgit\datastructurestudy\图\最小生成树_prim\最小生成树_prim.cpp(16): warning C4005: “INFINITY”: 宏重定义
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\math.h(78): note: 参见“INFINITY”的前一个定义
+  最小生成树_Prim.vcxproj -> E:\msysgit\DataStructureStudy\图\Debug\最小生成树_Prim.exe
+  最小生成树_Prim.vcxproj -> E:\msysgit\DataStructureStudy\图\Debug\最小生成树_Prim.pdb (Full PDB)
