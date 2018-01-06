@@ -1,0 +1,5 @@
+﻿  最短路径_Dijkstra.cpp
+e:\msysgit\datastructurestudy\图\最短路径_dijkstra\最短路径_dijkstra.cpp(12): warning C4005: “INFINITY”: 宏重定义
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\math.h(78): note: 参见“INFINITY”的前一个定义
+  最短路径_Dijkstra.vcxproj -> E:\msysgit\DataStructureStudy\图\Debug\最短路径_Dijkstra.exe
+  最短路径_Dijkstra.vcxproj -> E:\msysgit\DataStructureStudy\图\Debug\最短路径_Dijkstra.pdb (Full PDB)
