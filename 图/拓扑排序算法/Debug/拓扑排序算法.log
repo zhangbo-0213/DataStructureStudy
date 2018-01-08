@@ -1,0 +1,6 @@
+﻿  拓扑排序算法.cpp
+e:\msysgit\datastructurestudy\图\拓扑排序算法\拓扑排序算法.cpp(19): warning C4005: “INFINITY”: 宏重定义
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\math.h(78): note: 参见“INFINITY”的前一个定义
+e:\msysgit\datastructurestudy\图\拓扑排序算法\拓扑排序算法.cpp(111): warning C4101: “j”: 未引用的局部变量
+  拓扑排序算法.vcxproj -> E:\msysgit\DataStructureStudy\图\Debug\拓扑排序算法.exe
+  拓扑排序算法.vcxproj -> E:\msysgit\DataStructureStudy\图\Debug\拓扑排序算法.pdb (Full PDB)
