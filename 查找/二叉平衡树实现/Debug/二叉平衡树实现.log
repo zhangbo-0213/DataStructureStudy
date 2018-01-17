@@ -1,0 +1,5 @@
+﻿  二叉平衡树实现.cpp
+e:\msysgit\datastructurestudy\查找\二叉平衡树实现\二叉平衡树实现.cpp(188): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 2 拥有了类型“BiTree *”
+e:\msysgit\datastructurestudy\查找\二叉平衡树实现\二叉平衡树实现.cpp(188): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 3 拥有了类型“BiTree”
+  二叉平衡树实现.vcxproj -> E:\msysgit\DataStructureStudy\查找\Debug\二叉平衡树实现.exe
+  二叉平衡树实现.vcxproj -> E:\msysgit\DataStructureStudy\查找\Debug\二叉平衡树实现.pdb (Full PDB)
