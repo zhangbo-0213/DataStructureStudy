@@ -68,7 +68,6 @@ void LeftBalance(BiTree *T) {
 		case RH:
 			(*T)->bf = EH;
 			L->bf = LH;
-			L->bf = LH;
 			break;
 		}
 		L_Rotate(&(*T)->lchild);

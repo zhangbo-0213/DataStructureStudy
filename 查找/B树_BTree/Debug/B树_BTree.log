@@ -1,0 +1,5 @@
+﻿  B树_BTree.cpp
+e:\msysgit\datastructurestudy\查找\b树_btree\b树_btree.cpp(36): warning C4091: “typedef ”: 没有声明变量时忽略“Result”的左侧
+e:\msysgit\datastructurestudy\查找\b树_btree\b树_btree.cpp(144): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“BTree”
+  B树_BTree.vcxproj -> E:\msysgit\DataStructureStudy\查找\Debug\B树_BTree.exe
+  B树_BTree.vcxproj -> E:\msysgit\DataStructureStudy\查找\Debug\B树_BTree.pdb (Full PDB)
