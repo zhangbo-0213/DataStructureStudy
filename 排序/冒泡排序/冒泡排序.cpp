@@ -84,11 +84,12 @@ void  ShellSort(Sqlist *L) {
 	do {
 		increment = increment / 3 + 1;
 		for (i = increment + 1; i <= L->length; i++) {
-			if (L->arr[i] < L->arr[i - increment])
+			if (L->arr[i] < L->arr[i - increment]) {
 				L->arr[0] = L->arr[i];
-			for (j = i - increment; j > 0 && L->arr[j] > L->arr[0]; j -= increment)
-				L->arr[j + increment] = L->arr[j];
-			L->arr[j + increment] = L->arr[0];
+				for (j = i - increment; j > 0 && L->arr[j] > L->arr[0]; j -= increment)
+					L->arr[j + increment] = L->arr[j];
+				L->arr[j + increment] = L->arr[0];
+			}	
 		}
 	} while (increment > 1);
 }
@@ -100,10 +101,10 @@ void  ShellSort(Sqlist *L) {
 void HeapAdjust(Sqlist *L, int s, int m) {
 	int temp = L->arr[s];
 	int i;
-	for (i = 2 * s; i < m; i *= 2) {
-		if (L->arr[i] < L->arr[i + 1])
+	for (i = 2 * s; i <=m; i *= 2) {
+		if (i<m&&L->arr[i] < L->arr[i + 1])
 			++i;
-		if (temp > L->arr[i])
+		if (temp >= L->arr[i])
 			break;
 		L->arr[s] = L->arr[i];
 		s = i;
@@ -122,36 +123,117 @@ void HeapSort(Sqlist *L) {
 	}
 }
 
+//归并排序    
+//利用归并的思想实现排序的方法。其原理是：假设初始含有n个记录，则可以看成是n个有序的子序列，
+//每个子序列的长度为1，然后两两归并，得到[n/2]个长度为2或1的有序子序列，再两两归并，
+//如此重复，直至得到一个长度为n的有序序列为止，这种排序方法称为2路归并排序。    
+
+//归并排序的递归实现  
+void Merge(int SR[], int TR[], int i, int m, int n) {
+	int j, k, l;
+	for (j = m + 1, k = i; i <= m&&j <= n; k++) {
+		//在前后两段中挑选较小的放入排序后的数组中
+		if (SR[i] < SR[j])
+			TR[k] = SR[i++];
+		else
+			TR[k] = SR[j++];
+	}
+	if (i <= m)//前半段有剩余
+	{
+		for (l = 0; l <= m - i; l++)
+			TR[k + l] = SR[i+l];
+	}
+	if (j <= n) //后半段有剩余
+	{
+		for (l = 0; l<= n-j; l++)
+			TR[k + l] = SR[j+l];
+	}
+}
+
+void MSort(int SR[], int TR1[], int s, int t) {
+	int m;
+	int TR2[MAXSIZE + 1];
+	if (s == t)
+		TR1[s] = SR[s];
+	else {
+		m = (s + t) / 2;
+		//将上一层的数组分成两部分,每一部分实现有序，存入TR2
+		MSort(SR,TR2,s,m);
+		MSort(SR,TR2,m+1,t);
+		//将TR2[s..m]和TR2[m+1..t]完成有序归并到TR1
+		Merge(TR2, TR1, s, m, t);
+	}
+}
+void MergeSort(Sqlist *L) {
+	MSort(L->arr, L->arr, 1, L->length);
+}
+
+
+//归并排序的非递归实现
+//将长度为s的子序列两两归并到TR中
+void MergePass(int SR[], int TR[], int s, int n) {
+	int i = 1;
+	int j;
+	while (i <= n - 2 * s + 1) {
+		Merge(SR, TR, i, i + s - 1, i + 2 * s - 1);  //调用Merge 将长度为s的子序列两两归并
+		i += 2 * s;
+	}
+	if (i <= n - s + 1)  //归并最后两个子序列
+		Merge(SR, TR, i, i + s - 1, n);
+	else                      //剩下最后的单个子序列
+		for (j = i; j <= n; j++)
+			TR[j] = SR[j];
+}
+
+void MergeSort2(Sqlist *L) {
+	int TR[MAXSIZE];
+	int k = 1;
+	while (k < L->length) {
+		MergePass(L->arr, TR, k, L->length);
+		k = 2 * k;
+		MergePass(TR, L->arr, k, L->length);
+		k = 2 * k;
+	}
+}
 int main()
 {
 	int d[N] = { 50,10,90,30,70,40,80,60,20 };
-	Sqlist L0,L1,L2,L3,L4;
+	Sqlist L0,L1,L2,L3,L4,L5,L6;
 	int i;
 	for (i = 0; i < N; i++) {
 		L0.arr[i + 1] = d[i];
 	}
 	L0.length = N;  
-	L4=L3=L2=L1 = L0;
+	L6=L5=L4=L3=L2=L1 = L0;
 	printf("冒泡排序:\n");
 	BubbleSort(&L0);
 	print(L0);
 
 
 	printf("选择排序:\n");
-	BubbleSort(&L1);
+	SelectSort(&L1);
 	print(L1);
 
 	printf("插入排序:\n");
-	BubbleSort(&L2);
+	InsertSort(&L2);
 	print(L2);
 
 	printf("希尔排序:\n");
-	BubbleSort(&L3);
+	ShellSort(&L3);
 	print(L3);
 
 	printf("堆排序:\n");
-	BubbleSort(&L4);
+	HeapSort(&L4);
 	print(L4);
+
+	printf("归并排序递归实现:\n");
+	MergeSort(&L5);
+	print(L5);
+
+	printf("归并排序非递归实现:\n");
+	MergeSort2(&L6);
+	print(L6);
+
 	getchar();
     return 0;
 }
