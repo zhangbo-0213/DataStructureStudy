@@ -12,6 +12,7 @@
 
 #define N 9
 #define MAXSIZE 100
+#define MAX_LENGTH_INSERT_SORT 7
 typedef int Status;
 
 typedef struct {
@@ -194,17 +195,80 @@ void MergeSort2(Sqlist *L) {
 		MergePass(TR, L->arr, k, L->length);
 		k = 2 * k;
 	}
+}        
+
+//快速排序
+//快速排序基本思想：   
+//将待排序序列分成两部分，其中一部分关键字均比另一部分的关键字小，
+//再对两部分分别进行排序，直到所有部分有序    
+ 
+//对子部分进行排序的函数
+//交换顺序表中的记录，使中枢轴找到自己的位置
+//使中枢轴前面的关键字均小于中枢轴，后面的关键字均大于中枢轴    
+int Partition(Sqlist *L, int low, int high) {
+	int pivotKey;
+	int m=low+(high-low)/2;
+	//pivotKey = L->arr[low];
+	//三位取中的中枢轴优化
+	if (L->arr[low] > L->arr[high])
+		Swap(L, low, high);
+	if (L->arr[m] > L->arr[high])
+		Swap(L, m, high);
+	if (L->arr[low] > L->arr[m])
+		Swap(L,low,m);
+
+	pivotKey = L->arr[low];
+	L->arr[0] = pivotKey;
+	while (low<high) {
+		while (low < high&&L->arr[high] >= pivotKey)
+			high--;
+		//Swap(L, low, high);
+		//使用替换代替交换，节省部分性能
+		L->arr[low] = L->arr[high];
+		while (low < high&&L->arr[low] <= pivotKey)
+			low++;
+		//Swap(L, low, high);
+		//使用替换代替交换，节省部分性能
+		L->arr[high] = L->arr[low];
+	}
+	L->arr[low] = L->arr[0];
+	return low;
+}
+
+//对顺序表的子序列L[low--high]进行分块排序
+void QSort(Sqlist *L, int low, int high) {
+	int pivot;
+	//优化小数组排序时使用直接插入排序，而不是快速排序
+	//if(low<high){
+	if ((high-low)>MAX_LENGTH_INSERT_SORT) {
+		//减少递归次数优化整体性能
+		while (low < high) {
+			pivot = Partition(L, low, high);
+			QSort(L, low, pivot - 1);
+			low=pivot+1;
+		}
+		//pivot = Partition(L, low, high);
+		//QSort(L, low, pivot - 1);
+		//QSort(L, pivot+1, high);
+	}
+	else {
+		InsertSort(L);
+	}
+}
+
+void QuickSort(Sqlist *L) {
+	QSort(L, 1, L->length);
 }
 int main()
 {
 	int d[N] = { 50,10,90,30,70,40,80,60,20 };
-	Sqlist L0,L1,L2,L3,L4,L5,L6;
+	Sqlist L0,L1,L2,L3,L4,L5,L6,L7;
 	int i;
 	for (i = 0; i < N; i++) {
 		L0.arr[i + 1] = d[i];
 	}
 	L0.length = N;  
-	L6=L5=L4=L3=L2=L1 = L0;
+	L7=L6=L5=L4=L3=L2=L1 = L0;
 	printf("冒泡排序:\n");
 	BubbleSort(&L0);
 	print(L0);
@@ -233,6 +297,10 @@ int main()
 	printf("归并排序非递归实现:\n");
 	MergeSort2(&L6);
 	print(L6);
+
+	printf("快速排序:\n");
+	QuickSort(&L7);
+	print(L7);
 
 	getchar();
     return 0;
